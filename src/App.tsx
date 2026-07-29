@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-import adityaProfile from './assets/Aditya profile.jpeg'
-import adityaResume from './assets/Aditya_Yadav_Resume.pdf'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import FileModal from './components/FileModal'
 interface ExperienceItem {
   company: string
   role: string
@@ -57,119 +58,18 @@ function App() {
     ]
   }
 
-  // File Modal Contents
-  const getFileContent = (fileName: string) => {
-    switch (fileName) {
-      case 'More about me':
-        return (
-          <>
-            <p>Hi, I'm Aditya. I'm a full-stack developer in the making — currently a third-year Computer Science student, spending most of my time turning half-formed ideas into working, deployed products.</p>
-            <p>I build with the MERN stack, but what actually gets me excited is the gap between "it works" and "it's actually good" — the extra pass where a project stops feeling like a tutorial and starts feeling like something people would use.</p>
-            <h3>How I work:</h3>
-            <ul>
-              <li><strong>Ship first, theorize later:</strong> I learn fastest by building something real, then going back to understand why it holds together.</li>
-              <li><strong>Boring code wins:</strong> A clean, well-structured API beats a clever one every time — I'd rather it read well at 2am than impress someone for five minutes.</li>
-              <li><strong>Every project is interview practice:</strong> If I can't explain a decision line by line, it's not done yet.</li>
-            </ul>
-            <p>Outside of classes, I’m usually found building something — currently trying to wrap my head around performance optimization and why my CSS always ends up in a fight with the browser.</p>
-          </>
-        )
-
-      case 'Resume':
-        return (
-          <div className="resume-container">
-            <div className="resume-section">
-              <div className="resume-section-title">Summary</div>
-              <p style={{ fontSize: '0.85rem' }}>Full-stack developer (MERN) with production internship experience building a live service marketplace. Shipped REST APIs, responsive React UIs, and MongoDB data layers for real users. Seeking a full-time role where I can write code that ships.</p>
-            </div>
-
-            <div className="resume-section">
-              <div className="resume-section-title">Experience</div>
-              <div className="resume-item">
-                <div className="resume-item-header">
-                  <span className="resume-item-title">Software Developer Intern</span>
-                  <span className="resume-item-date">Nov 2025 — Dec 2025</span>
-                </div>
-                <div className="resume-item-sub">6Origin, Nagpur</div>
-                <p className="resume-item-desc">Delivered 5 production REST API endpoints for service listing and booking, reducing server response time ~30% via aggregation query optimisation. Built 4 responsive React UI components. Integrated MongoDB-backed user auth and service-listing data layer.</p>
-              </div>
-            </div>
-
-            <div className="resume-section">
-              <div className="resume-section-title">Projects</div>
-              <div className="resume-item">
-                <div className="resume-item-header">
-                  <span className="resume-item-title">UrbanEats</span>
-                  <span className="resume-item-date">2025</span>
-                </div>
-                <div className="resume-item-sub">Video-Feed Food Discovery & Ordering App</div>
-                <p className="resume-item-desc">Architected and shipped a full-stack food discovery platform solo — designing 4 route modules with 13 REST API endpoints. Built a dual-role auth system and a TikTok-style video food feed with auto-play scroll in React.</p>
-              </div>
-            </div>
-
-            <div className="resume-section">
-              <div className="resume-section-title">Education</div>
-              <div className="resume-item">
-                <div className="resume-item-header">
-                  <span className="resume-item-title">B.Tech Computer Science Engineering</span>
-                  <span className="resume-item-date">Expected 2028</span>
-                </div>
-                <div className="resume-item-sub">GH Raisoni College of Engineering, Nagpur</div>
-                <p className="resume-item-desc">CGPA 7.3/10 · Coursework: DSA · MERN · OOPS</p>
-              </div>
-            </div>
-
-            <a href={adityaResume} download="Aditya_Yadav_Resume.pdf" style={{ textDecoration: 'none' }}>
-              <button className="download-resume-btn">
-                <svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                </svg>
-                Print / Save Resume
-              </button>
-            </a>
-          </div>
-        )
-      default:
-        return null
-    }
-  }
+  // State and logic
 
   return (
     <>
       {/* Header */}
-      <header className="portfolio-header">
-        <div className="profile-info">
-          <img src={adityaProfile} alt="Aditya" className="avatar" />
-          <h1>Hello, it's Aditya 👋</h1>
-        </div>
-        <div className="header-controls">
-          <div className="time-badge">
-            {currentTime.getHours() < 12 ? (
-              <svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
-              </svg>
-            ) : (
-              <svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
-              </svg>
-            )}
-            <span>{formatTime(currentTime)}</span>
-            <span className="date-divider">&nbsp;&nbsp;</span>
-            <span>{formatDate(currentTime)}</span>
-          </div>
-          <div className="theme-toggle-container">
-            <label className="toggle-switch">
-              <input
-                type="checkbox"
-                checked={isDarkMode}
-                onChange={() => setIsDarkMode(!isDarkMode)}
-              />
-              <span className="slider"></span>
-            </label>
-            <span>Dark</span>
-          </div>
-        </div>
-      </header>
+      <Header
+        currentTime={currentTime}
+        isDarkMode={isDarkMode}
+        setIsDarkMode={setIsDarkMode}
+        formatTime={formatTime}
+        formatDate={formatDate}
+      />
 
       {/* Main Grid */}
       <main className="portfolio-grid">
@@ -327,7 +227,7 @@ function App() {
 
             <foreignObject x="186" y="-16" width="100" height="100">
               <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <div 
+                <div
                   className="location-marker"
                   onMouseEnter={() => setIsMapHovered(true)}
                   onMouseLeave={() => setIsMapHovered(false)}
@@ -421,7 +321,7 @@ function App() {
                   <span className="bp-tag">MongoDB</span>
                 </div>
                 <a href="https://github.com/Aditya-collabs/UrbanEats.git" target="_blank" rel="noopener noreferrer" className="bp-repo-link">
-                  <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.379.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                  <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.379.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z" /></svg>
                   View repo
                 </a>
               </div>
@@ -438,7 +338,7 @@ function App() {
                   <span className="bp-tag">Supabase</span>
                 </div>
                 <a href="#" className="bp-repo-link">
-                  <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.379.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                  <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.379.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z" /></svg>
                   View repo
                 </a>
               </div>
@@ -474,52 +374,8 @@ function App() {
 
       </main>
 
-      {/* Footer */}
-      <footer className="portfolio-footer">
-        <a 
-          href="mailto:adityayadav1125@gmail.com" 
-          className="footer-link"
-          onClick={() => {
-            navigator.clipboard.writeText('adityayadav1125@gmail.com');
-            alert('Email adityayadav1125@gmail.com copied to clipboard!');
-          }}
-        >
-          Email
-        </a>
-        <a href="https://www.instagram.com/adityayadav.1805/?hl=en" target="_blank" rel="noopener noreferrer" className="footer-link">Instagram</a>
-        <a href="https://www.linkedin.com/in/aditya-yadav-70454831b" target="_blank" rel="noopener noreferrer" className="footer-link">LinkedIn</a>
-        <a href="https://github.com/Aditya-collabs" target="_blank" rel="noopener noreferrer" className="footer-link">Github</a>
-      </footer>
-
-      {/* Modal Overlay */}
-      {selectedFile && (
-        <div className="modal-overlay" onClick={() => setSelectedFile(null)}>
-          <div className="modal-container" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-header">
-              <div className="modal-title-wrapper">
-                {selectedFile === 'Resume' ? (
-                  <svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="red">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                  </svg>
-                ) : (
-                  <svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="var(--file-txt-text)">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                  </svg>
-                )}
-                <span className="modal-title">{selectedFile === 'Resume' ? 'Aditya_resume.pdf' : `${selectedFile.toLowerCase().replace(/, /g, '_').replace(/ /g, '_')}.txt`}</span>
-              </div>
-              <button className="modal-close-btn" onClick={() => setSelectedFile(null)}>
-                <svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-            <div className="modal-body">
-              {getFileContent(selectedFile)}
-            </div>
-          </div>
-        </div>
-      )}
+      <Footer />
+      <FileModal selectedFile={selectedFile} setSelectedFile={setSelectedFile} />
     </>
   )
 }
