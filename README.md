@@ -46,7 +46,7 @@ inspired-portfolio/
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/Aditya-collabs/inspired-portfolio.git
+   git clone https://github.com/Aditya-collabs/My-Portfolio-.git
    cd inspired-portfolio
    ```
 
