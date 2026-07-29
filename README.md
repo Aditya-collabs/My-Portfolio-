@@ -38,10 +38,6 @@ inspired-portfolio/
 └── README.md               # Project documentation
 ```
 
-## Screenshots
-*(Add screenshots of the portfolio here once deployed)*
-![Portfolio Preview Placeholder](https://via.placeholder.com/800x450.png?text=Portfolio+Preview)
-
 ## Installation
 
 1. **Clone the repository:**
