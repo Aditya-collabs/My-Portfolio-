@@ -5,7 +5,7 @@
 > A modern, interactive portfolio showcasing my work as a Full Stack (MERN) Developer.
 
 ## Live Demo
-my-portfolio-three-gamma-x2nkug2nep.vercel.app
+[https://my-portfolio-three-gamma-x2nkug2nep.vercel.app](https://my-portfolio-three-gamma-x2nkug2nep.vercel.app)
 
 ## Features
 - **Interactive UI**: Windows/macOS inspired window management and file explorer.
@@ -19,7 +19,7 @@ my-portfolio-three-gamma-x2nkug2nep.vercel.app
 - **Frontend**: React 19, TypeScript, Vite
 - **Styling**: Vanilla CSS with modern Flexbox/Grid layouts
 - **Tooling**: Oxlint (Linting)
-- **Deployment**: [Platform Name, e.g., Vercel / Netlify]
+- **Deployment**: Vercel
 
 ## Folder Structure
 ```
